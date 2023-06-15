@@ -6,9 +6,6 @@ jobs:
       - image: cimg/node:16.13.2
     steps:
       - checkout
-      - run:
-          name: Update Yarn
-          command: "sudo npm install -g yarn --force"
       - restore_cache:
           key: yarn-packages-{{ checksum "yarn-lock" }}
       - run:
