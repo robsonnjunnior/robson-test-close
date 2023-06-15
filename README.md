@@ -1,6 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/ab5e4a00-0a1c-4aa3-a131-846a1891c63d/deploy-status)](https://app.netlify.com/sites/robson-small-test/deploys)
-
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/robsonnjunnior/robson-test-close/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/robsonnjunnior/robson-test-close/tree/main)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ab5e4a00-0a1c-4aa3-a131-846a1891c63d/deploy-status)](https://app.netlify.com/sites/robson-small-test/deploys)  [![CircleCI](https://dl.circleci.com/status-badge/img/gh/robsonnjunnior/robson-test-close/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/robsonnjunnior/robson-test-close/tree/main)
 
 ## What i need to do?
 
