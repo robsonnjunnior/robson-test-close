@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ab5e4a00-0a1c-4aa3-a131-846a1891c63d/deploy-status)](https://app.netlify.com/sites/robson-small-test/deploys)
+
 ## What i need to do?
 
 #### Implement a feature to allow item selection with the following requirements:
