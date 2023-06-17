@@ -21,7 +21,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: cimg/node:latest
+      - image: cimg/node:16.13.2
     steps:
       - checkout
       - restore_cache:
@@ -47,7 +47,7 @@ jobs:
   test:
     executor: node/default
     docker:
-      - image: circleci/node:latest
+      - image: cimg/node:16.13.2
     steps:
       - checkout
       - node/install-packages:
@@ -59,7 +59,7 @@ jobs:
 
   deploy:
       docker:
-      - image: cimg/node:latest
+      - image: cimg/node:16.13.2
       steps:
       - attach_workspace:
           at: ~/project
