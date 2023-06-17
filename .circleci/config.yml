@@ -12,14 +12,14 @@ workflows:
             - build
       - deploy:
           requires:
-            - sonar
+            - test
           filters:
             branches:
               only: main
 
 jobs:
   build:
-    working_directory: ~/project
+    working_directory: ~/repo
     docker:
       - image: cimg/node:latest
     steps:
@@ -47,7 +47,7 @@ jobs:
   test:
     executor: node/default
     docker:
-      - image: cimg/node:latest
+      - image: circleci/node:latest
     steps:
       - checkout
       - node/install-packages:
@@ -59,8 +59,10 @@ jobs:
 
   deploy:
       docker:
-      - image: cimg/node:16.13.2
-    executor: node/default
+      - image: cimg/node:latest
+      steps:
+      - attach_workspace:
+          at: ~/project
       - run:
           name: Deploy to Netlify
           command: ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=build
