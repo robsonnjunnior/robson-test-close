@@ -37,20 +37,16 @@ const useItems = () => {
   const [selectedItems, setSelectedItems] = useState<Array<IItem>>([])
 
   const handleClickItems = useCallback(
-    (itemSelected: IItem, event: React.MouseEvent<HTMLElement>) => {
+    (itemSelected: IItem) => {
       const isSelected = selectedItems.some(
         (selectedItem) => selectedItem.name === itemSelected.name,
       )
 
-      if (event.ctrlKey || event.metaKey) {
-        setSelectedItems((prev) =>
-          isSelected
-            ? prev.filter((item) => item.name !== itemSelected.name)
-            : [...prev, itemSelected],
-        )
-      } else {
-        setSelectedItems(isSelected ? [] : [itemSelected])
-      }
+      setSelectedItems((prev) =>
+        isSelected
+          ? prev.filter((item) => item.name !== itemSelected.name)
+          : [...prev, itemSelected],
+      )
     },
     [selectedItems],
   )

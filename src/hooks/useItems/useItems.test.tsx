@@ -1,4 +1,4 @@
-import { fireEvent, act, renderHook, screen } from '@testing-library/react'
+import { act, renderHook } from '@testing-library/react'
 import useItems from './useItems'
 
 const mockObject = [
@@ -21,18 +21,14 @@ describe('useItems', () => {
     const { result } = renderHook(() => useItems())
     const { handleClickItems } = result.current
 
-    const eventMultiSelected = {
-      ctrlKey: true,
-    } as React.MouseEvent<HTMLElement, MouseEvent>
-
     act(() => {
-      handleClickItems(mockObject[0], eventMultiSelected)
+      handleClickItems(mockObject[0])
     })
 
     expect(result.current.selectedItems).toEqual([mockObject[0]])
 
     act(() => {
-      handleClickItems(mockObject[1], eventMultiSelected)
+      handleClickItems(mockObject[1])
     })
 
     expect(result.current.selectedItems).toEqual(mockObject)
@@ -42,20 +38,16 @@ describe('useItems', () => {
     const { result } = renderHook(() => useItems())
     const { handleClickItems } = result.current
 
-    const eventOnlyOne = {
-      ctrlKey: false,
-    } as React.MouseEvent<HTMLElement, MouseEvent>
-
     act(() => {
-      handleClickItems(mockObject[0], eventOnlyOne)
+      handleClickItems(mockObject[0])
     })
 
     expect(result.current.selectedItems).toEqual([mockObject[0]])
 
     act(() => {
-      handleClickItems(mockObject[1], eventOnlyOne)
+      handleClickItems(mockObject[1])
     })
 
-    expect(result.current.selectedItems).toEqual([mockObject[1]])
+    expect(result.current.selectedItems).toEqual(mockObject)
   })
 })

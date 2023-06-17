@@ -4,7 +4,7 @@ import { IItem } from '../../shared/models'
 interface IItemProps {
   item: IItem
   isSelected: boolean
-  handleClickItems: (item: IItem, event: React.MouseEvent<HTMLElement>) => void
+  handleClickItems: (item: IItem) => void
 }
 
 const Item = ({ item, isSelected, handleClickItems }: IItemProps) => {
@@ -19,7 +19,7 @@ const Item = ({ item, isSelected, handleClickItems }: IItemProps) => {
       data-testid={'li-item'}
       onMouseEnter={() => toggleHover()}
       onMouseLeave={() => toggleHover()}
-      onClick={(event: React.MouseEvent<HTMLElement>) => handleClickItems(item, event)}
+      onClick={() => handleClickItems(item)}
       className={`List__item List__item--${item.color} ${
         isSelected || hover ? 'List__item--selected' : ''
       }`}

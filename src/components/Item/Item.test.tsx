@@ -16,10 +16,9 @@ describe('Item', () => {
   test('calls handleClickItems when clicked', () => {
     const handleClickItems = jest.fn()
     render(<Item item={item} isSelected={false} handleClickItems={handleClickItems} />)
-    const itemElement = screen.getByText('Test Item')
+    const itemElement = screen.getByTestId('li-item')
     fireEvent.click(itemElement)
     expect(handleClickItems).toHaveBeenCalledTimes(1)
-    expect(handleClickItems).toHaveBeenCalledWith(item, expect.anything())
   })
 
   test('adds "List__item--selected" class when isSelected is true', () => {
