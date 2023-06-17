@@ -16,6 +16,7 @@ const Item = ({ item, isSelected, handleClickItems }: IItemProps) => {
 
   return (
     <li
+      data-testid={'li-item'}
       onMouseEnter={() => toggleHover()}
       onMouseLeave={() => toggleHover()}
       onClick={(event: React.MouseEvent<HTMLElement>) => handleClickItems(item, event)}
