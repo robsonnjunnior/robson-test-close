@@ -3,21 +3,27 @@ import Item from '../../components/Item'
 
 const ListItems = () => {
   const { items, selectedItems, handleClickItems } = useItems()
+
+  const hasItemSelected = selectedItems.length > 0
+
   return (
     <div className='container'>
       <div className='items-selected'>
         <h2>Items selected :</h2>
-        <ul className='List-items-selected'>
-          {selectedItems.map((item) => (
-            <li className={`List-items-selected__item List__item--${item.color}`} key={item.name}>
-              {item.name}
-            </li>
-          ))}
-        </ul>
+        {(hasItemSelected && (
+          <ul className='List-items-selected'>
+            {selectedItems.map((item) => (
+              <li className={`List-items-selected__item List__item--${item.color}`} key={item.name}>
+                {item.name}
+              </li>
+            ))}
+          </ul>
+        )) || <span>No items selected</span>}
       </div>
 
       <hr />
 
+      <h2>Items list :</h2>
       <ul className='List'>
         {items.map((item) => {
           const isItemSelected = selectedItems.some(
