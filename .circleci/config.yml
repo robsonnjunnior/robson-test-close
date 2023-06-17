@@ -1,20 +1,27 @@
 version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+  coveralls: coveralls/coveralls@1.0.6
 
 workflows:
-  version: 2
-  build-deploy:
+  CICD:
     jobs:
-      - build:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - sonar
           filters:
             branches:
-              only:
-                - main
+              only: main
 
 jobs:
   build:
-    working_directory: ~/repo
+    working_directory: ~/project
     docker:
-      - image: cimg/node:16.13.2
+      - image: cimg/node:latest
     steps:
       - checkout
       - restore_cache:
@@ -32,10 +39,28 @@ jobs:
       - run:
           name: Build React App
           command: yarn build
-      - save_cache:
-          key: app-build-cache-{{ .Branch }}
+      - persist_to_workspace:
+          root: ~/project
           paths:
             - ./build
+
+  test:
+    executor: node/default
+    docker:
+      - image: cimg/node:latest
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          command: yarn test --coverage
+          name: Run tests
+      - coveralls/upload
+
+  deploy:
+      docker:
+      - image: cimg/node:16.13.2
+    executor: node/default
       - run:
           name: Deploy to Netlify
           command: ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=build
