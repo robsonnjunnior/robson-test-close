@@ -42,8 +42,6 @@ const useItems = () => {
         (selectedItem) => selectedItem.name === itemSelected.name,
       )
 
-      console.log({ selectedItems, itemSelected, event, isSelected })
-
       if (event.ctrlKey || event.metaKey) {
         setSelectedItems((prev) =>
           isSelected
@@ -83,8 +81,6 @@ const useItems = () => {
       ),
     [],
   )
-
-  console.log({ selectedItems })
 
   return { items, selectedItems, handleClickItems }
 }
