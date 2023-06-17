@@ -19,7 +19,7 @@ workflows:
 
 jobs:
   build:
-    working_directory: ~/repo
+    working_directory: ~/project
     docker:
       - image: cimg/node:16.13.2
     steps:
@@ -45,7 +45,6 @@ jobs:
             - ./build
 
   test:
-    executor: node/default
     docker:
       - image: cimg/node:16.13.2
     steps:
