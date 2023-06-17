@@ -1,19 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IItem } from '../../shared/models'
 
 interface IItemProps {
   item: IItem
   isSelected: boolean
-  handleClickItems: (item: string, event: React.MouseEvent<HTMLElement>) => void
+  handleClickItems: (item: IItem, event: React.MouseEvent<HTMLElement>) => void
 }
 
 const Item = ({ item, isSelected, handleClickItems }: IItemProps) => {
+  const [hover, setHover] = useState<boolean>(false)
+
+  const toggleHover = () => {
+    setHover((prev) => !prev)
+  }
+
   return (
     <li
-      onClick={(event: React.MouseEvent<HTMLElement>) => handleClickItems(item.name, event)}
-      className={`List__item List__item--${item.color} ${isSelected ? 'List__item--selected' : ''}`}
+      onMouseEnter={() => toggleHover()}
+      onMouseLeave={() => toggleHover()}
+      onClick={(event: React.MouseEvent<HTMLElement>) => handleClickItems(item, event)}
+      className={`List__item List__item--${item.color} ${
+        isSelected || hover ? 'List__item--selected' : ''
+      }`}
     >
-      {item.name}
+      <span>{item.name}</span>
     </li>
   )
 }

@@ -34,24 +34,21 @@ const fruits: string[] = [
 ]
 
 const useItems = () => {
-  const [selectedItems, setSelectedItems] = useState<Array<string>>([])
+  const [selectedItems, setSelectedItems] = useState<Array<IItem>>([])
 
   const handleClickItems = useCallback(
-    (itemSelected: string, event: React.MouseEvent<HTMLElement>) => {
+    (itemSelected: IItem, event: React.MouseEvent<HTMLElement>) => {
+      const isSelected = selectedItems.some(
+        (selectedItem) => selectedItem.name === itemSelected.name,
+      )
       if (event.ctrlKey || event.metaKey) {
-        // Verifica se o item já está selecionado
-        const isSelected = selectedItems.includes(itemSelected)
-
-        if (isSelected) {
-          // Remove o item da lista de seleção
-          setSelectedItems((prev) => prev.filter((item) => item !== itemSelected))
-        } else {
-          // Adiciona o item à lista de seleção
-          setSelectedItems((prev) => [...prev, itemSelected])
-        }
+        setSelectedItems((prev) =>
+          isSelected
+            ? prev.filter((item) => item.name !== itemSelected.name)
+            : [...prev, itemSelected],
+        )
       } else {
-        // Limpa a seleção e seleciona apenas o item clicado
-        setSelectedItems([itemSelected])
+        setSelectedItems(isSelected ? [] : [itemSelected])
       }
     },
     [selectedItems],
